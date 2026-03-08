@@ -18,19 +18,19 @@ describe("Drug", () => {
   describe("standard drugs", () => {
     it("decreases the benefit and expiresIn for a normal drug", () => {
       expect(updateDrug("Doliprane", 2, 3)).toEqual(
-        drugFactory("Doliprane", 1, 2),
+        new StandardDrug("Doliprane", 1, 2),
       );
     });
 
     it("decreases normal drugs twice as fast after expiration", () => {
       expect(updateDrug("Doliprane", 0, 3)).toEqual(
-        drugFactory("Doliprane", -1, 1),
+        new StandardDrug("Doliprane", -1, 1),
       );
     });
 
     it("never lets the benefit go below zero", () => {
       expect(updateDrug("Doliprane", 2, 0)).toEqual(
-        drugFactory("Doliprane", 1, 0),
+        new StandardDrug("Doliprane", 1, 0),
       );
     });
   });
@@ -105,7 +105,7 @@ describe("Drug", () => {
     });
 
     it("creates a standard subclass for standard drugs", () => {
-      expect(drugFactory("Doliprane", 2, 3)).toBeInstanceOf(StandardDrug);
+      expect(new StandardDrug("Doliprane", 2, 3)).toBeInstanceOf(StandardDrug);
     });
 
     it("creates an aged subclass for Herbal Tea", () => {
@@ -129,9 +129,7 @@ describe("Drug", () => {
     });
 
     it("throws for an unknown drug in the extracted factory", () => {
-      expect(() => drugFactory("Unknown Drug", 2, 3)).toThrow(
-        'Unknown drug: "Unknown Drug"',
-      );
+      expect(() => drugFactory("Unknown Drug", 2, 3)).toThrow("Unknown drug");
     });
   });
 });

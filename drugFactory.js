@@ -5,14 +5,10 @@ import {
   ImmutableDrug,
   StandardDrug,
 } from "./drug";
-import { DRUG_TYPES, getDrugType, isStandardDrugName } from "./drugsConfig";
+import { DRUG_TYPES, getDrugType } from "./drugsConfig";
 
 export default function drugFactory(name, expiresIn, benefit) {
   const type = getDrugType(name);
-
-  if (type === DRUG_TYPES.STANDARD && !isStandardDrugName(name)) {
-    throw new Error(`Unknown drug: "${name}"`);
-  }
 
   switch (type) {
     case DRUG_TYPES.AGED:

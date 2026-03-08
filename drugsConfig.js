@@ -43,10 +43,17 @@ const DRUG_NAME_TO_TYPE = {
   "Herbal Tea": DRUG_TYPES.AGED,
   Fervex: DRUG_TYPES.DROPOFF,
   "Magic Pill": DRUG_TYPES.IMMUTABLE,
+  Doliprane: DRUG_TYPES.STANDARD,
 };
 
 export function getDrugType(name) {
-  return DRUG_NAME_TO_TYPE[name] ?? DRUG_TYPES.STANDARD;
+  const drugType = DRUG_NAME_TO_TYPE[name];
+
+  if (drugType) {
+    return drugType;
+  }
+
+  throw new Error("Unknown drug");
 }
 
 export function getDrugNamesByType(type) {
@@ -57,8 +64,4 @@ export function getDrugNamesByType(type) {
 
 export function getFastFactor(name) {
   return FAST_CONFIG.factorByName[name];
-}
-
-export function isStandardDrugName(name) {
-  return name === "Doliprane";
 }
