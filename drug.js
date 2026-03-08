@@ -13,6 +13,10 @@ export class Drug {
     this.benefit = benefit;
   }
 
+  updateState() {
+    throw new Error("updateState() must be implemented by subclasses");
+  }
+
   increaseBenefit(amount) {
     this.benefit = Math.min(50, this.benefit + amount);
   }

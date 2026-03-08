@@ -1,6 +1,7 @@
 import {
   AgedDrug,
   DropoffDrug,
+  Drug,
   FastDrug,
   ImmutableDrug,
   StandardDrug,
@@ -97,6 +98,12 @@ describe("Drug", () => {
   });
 
   describe("typed construction", () => {
+    it("requires subclasses to implement updateState", () => {
+      expect(() => new Drug("Doliprane", 2, 3).updateState()).toThrow(
+        "updateState() must be implemented by subclasses",
+      );
+    });
+
     it("creates a standard subclass for standard drugs", () => {
       expect(drugFactory("Doliprane", 2, 3)).toBeInstanceOf(StandardDrug);
     });
