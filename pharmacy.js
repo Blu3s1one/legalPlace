@@ -5,7 +5,7 @@ export class Pharmacy {
     this.drugs = drugs;
   }
 
-  updateDrugsState() {
+  updateBenefitValue() {
     for (const drug of this.drugs) {
       drug.updateState();
     }

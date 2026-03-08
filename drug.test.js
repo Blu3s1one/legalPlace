@@ -1,5 +1,4 @@
 import { Drug } from "./drug";
-import expectedOutput from "./output.json";
 
 describe("Drug", () => {
   const updateDrug = (name, expiresIn, benefit) => {
@@ -76,9 +75,7 @@ describe("Drug", () => {
 
   describe("fast drugs", () => {
     it("decreases Dafalgan benefit twice as fast as normal drugs", () => {
-      expect(updateDrug("Dafalgan", 2, 10)).toEqual(
-        new Drug("Dafalgan", 1, 8),
-      );
+      expect(updateDrug("Dafalgan", 2, 10)).toEqual(new Drug("Dafalgan", 1, 8));
     });
 
     it("decreases Dafalgan benefit four points after expiration", () => {
@@ -87,5 +84,4 @@ describe("Drug", () => {
       );
     });
   });
-
 });

@@ -86,8 +86,7 @@ export class Drug {
   #updateStandardBenefit() {
     if (this.expiresIn < 0) {
       this.#decreaseBenefit(
-        STANDARD_CONFIG.benefitDecrease *
-          STANDARD_CONFIG.expirationMultiplier,
+        STANDARD_CONFIG.benefitDecrease * STANDARD_CONFIG.expirationMultiplier,
       );
       return;
     }
@@ -100,9 +99,7 @@ export class Drug {
 
     if (this.expiresIn < 0) {
       this.#decreaseBenefit(
-        FAST_CONFIG.benefitDecrease *
-          FAST_CONFIG.expirationMultiplier *
-          factor,
+        FAST_CONFIG.benefitDecrease * FAST_CONFIG.expirationMultiplier * factor,
       );
       return;
     }

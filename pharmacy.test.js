@@ -10,13 +10,10 @@ describe("Pharmacy", () => {
   });
 
   it("updates every drug in the collection", () => {
-    const drugs = [
-      new Drug("Doliprane", 2, 3),
-      new Drug("Herbal Tea", 2, 3),
-    ];
+    const drugs = [new Drug("Doliprane", 2, 3), new Drug("Herbal Tea", 2, 3)];
     const pharmacy = new Pharmacy(drugs);
 
-    pharmacy.updateDrugsState();
+    pharmacy.updateBenefitValue();
 
     expect(drugs).toEqual([
       new Drug("Doliprane", 1, 2),
@@ -28,7 +25,7 @@ describe("Pharmacy", () => {
     const drugs = [new Drug("Doliprane", 2, 3)];
     const pharmacy = new Pharmacy(drugs);
 
-    expect(pharmacy.updateDrugsState()).toBe(drugs);
+    expect(pharmacy.updateBenefitValue()).toBe(drugs);
   });
 
   it("matches the reference simulation output", () => {
@@ -42,7 +39,7 @@ describe("Pharmacy", () => {
     const result = [];
 
     for (let elapsedDays = 0; elapsedDays < 30; elapsedDays += 1) {
-      result.push(JSON.parse(JSON.stringify(pharmacy.updateDrugsState())));
+      result.push(JSON.parse(JSON.stringify(pharmacy.updateBenefitValue())));
     }
 
     expect({ result }).toEqual(expectedOutput);
