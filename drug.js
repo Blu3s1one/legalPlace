@@ -1,8 +1,10 @@
 import {
   AGED_CONFIG,
   DROPOFF_CONFIG,
+  FAST_CONFIG,
   DRUG_TYPES,
   STANDARD_CONFIG,
+  getFastFactor,
   getDrugType,
 } from "./drugsConfig";
 
@@ -42,6 +44,11 @@ export class Drug {
 
     if (this.#type === DRUG_TYPES.DROPOFF) {
       this.#updateDropoffBenefit();
+      return;
+    }
+
+    if (this.#type === DRUG_TYPES.FAST) {
+      this.#updateFastBenefit();
       return;
     }
 
@@ -87,6 +94,22 @@ export class Drug {
 
     this.#decreaseBenefit(STANDARD_CONFIG.benefitDecrease);
   }
+
+  #updateFastBenefit() {
+    const factor = getFastFactor(this.name);
+
+    if (this.expiresIn < 0) {
+      this.#decreaseBenefit(
+        FAST_CONFIG.benefitDecrease *
+          FAST_CONFIG.expirationMultiplier *
+          factor,
+      );
+      return;
+    }
+
+    this.#decreaseBenefit(FAST_CONFIG.benefitDecrease * factor);
+  }
+
   #decreaseExpiration() {
     this.expiresIn -= 1;
   }

@@ -1,5 +1,6 @@
 export const DRUG_TYPES = {
   STANDARD: "standard",
+  FAST: "fast",
   AGED: "aged",
   DROPOFF: "dropoff",
   IMMUTABLE: "immutable",
@@ -8,6 +9,14 @@ export const DRUG_TYPES = {
 export const STANDARD_CONFIG = {
   benefitDecrease: 1,
   expirationMultiplier: 2,
+};
+
+export const FAST_CONFIG = {
+  benefitDecrease: STANDARD_CONFIG.benefitDecrease,
+  expirationMultiplier: STANDARD_CONFIG.expirationMultiplier,
+  factorByName: {
+    Dafalgan: 2,
+  },
 };
 
 export const AGED_CONFIG = {
@@ -30,6 +39,7 @@ export const IMMUTABLE_CONFIG = {
 };
 
 const DRUG_NAME_TO_TYPE = {
+  Dafalgan: DRUG_TYPES.FAST,
   "Herbal Tea": DRUG_TYPES.AGED,
   Fervex: DRUG_TYPES.DROPOFF,
   "Magic Pill": DRUG_TYPES.IMMUTABLE,
@@ -43,4 +53,8 @@ export function getDrugNamesByType(type) {
   return Object.keys(DRUG_NAME_TO_TYPE).filter(
     (name) => DRUG_NAME_TO_TYPE[name] === type,
   );
+}
+
+export function getFastFactor(name) {
+  return FAST_CONFIG.factorByName[name];
 }
