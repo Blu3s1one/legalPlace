@@ -58,3 +58,7 @@ export function getDrugNamesByType(type) {
 export function getFastFactor(name) {
   return FAST_CONFIG.factorByName[name];
 }
+
+export function isStandardDrugName(name) {
+  return name === "Doliprane";
+}

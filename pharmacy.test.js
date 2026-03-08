@@ -1,4 +1,5 @@
 import { Drug, Pharmacy } from "./pharmacy";
+import drugFactory from "./drugFactory";
 import expectedOutput from "./output.json";
 import expectedOutputWithDafalgan from "./outputWithDafalgan.json";
 
@@ -11,19 +12,22 @@ describe("Pharmacy", () => {
   });
 
   it("updates every drug in the collection", () => {
-    const drugs = [new Drug("Doliprane", 2, 3), new Drug("Herbal Tea", 2, 3)];
+    const drugs = [
+      drugFactory("Doliprane", 2, 3),
+      drugFactory("Herbal Tea", 2, 3),
+    ];
     const pharmacy = new Pharmacy(drugs);
 
     pharmacy.updateBenefitValue();
 
     expect(drugs).toEqual([
-      new Drug("Doliprane", 1, 2),
-      new Drug("Herbal Tea", 1, 4),
+      drugFactory("Doliprane", 1, 2),
+      drugFactory("Herbal Tea", 1, 4),
     ]);
   });
 
   it("returns the mutated drugs collection", () => {
-    const drugs = [new Drug("Doliprane", 2, 3)];
+    const drugs = [drugFactory("Doliprane", 2, 3)];
     const pharmacy = new Pharmacy(drugs);
 
     expect(pharmacy.updateBenefitValue()).toBe(drugs);
@@ -31,10 +35,10 @@ describe("Pharmacy", () => {
 
   it("matches the reference simulation output", () => {
     const drugs = [
-      new Drug("Doliprane", 20, 30),
-      new Drug("Herbal Tea", 10, 5),
-      new Drug("Fervex", 12, 35),
-      new Drug("Magic Pill", 15, 40),
+      drugFactory("Doliprane", 20, 30),
+      drugFactory("Herbal Tea", 10, 5),
+      drugFactory("Fervex", 12, 35),
+      drugFactory("Magic Pill", 15, 40),
     ];
     const pharmacy = new Pharmacy(drugs);
     const result = [];
@@ -48,11 +52,11 @@ describe("Pharmacy", () => {
 
   it("matches the simulation output when Dafalgan is included", () => {
     const drugs = [
-      new Drug("Doliprane", 20, 30),
-      new Drug("Herbal Tea", 10, 5),
-      new Drug("Fervex", 12, 35),
-      new Drug("Magic Pill", 15, 40),
-      new Drug("Dafalgan", 10, 20),
+      drugFactory("Doliprane", 20, 30),
+      drugFactory("Herbal Tea", 10, 5),
+      drugFactory("Fervex", 12, 35),
+      drugFactory("Magic Pill", 15, 40),
+      drugFactory("Dafalgan", 10, 20),
     ];
     const pharmacy = new Pharmacy(drugs);
     const result = [];
